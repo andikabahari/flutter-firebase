@@ -1,5 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase/models/my_user.dart';
 import 'package:flutter_firebase/services/auth.dart';
 
 class SignIn extends StatefulWidget {
@@ -25,12 +25,12 @@ class _SignInState extends State<SignIn> {
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
         child: ElevatedButton(
           onPressed: () async {
-            User user = await _auth.signInAnonymously();
+            MyUser user = await _auth.signInAnonymously();
             if (user == null) {
               print('error');
             } else {
               print('signed in');
-              print(user);
+              print(user.uid);
             }
           },
           child: Text('Sign In Anonymously'),
