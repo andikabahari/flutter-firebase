@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase/models/my_user.dart';
 import 'package:flutter_firebase/services/auth.dart';
 
-class SignIn extends StatefulWidget {
-  const SignIn({Key? key}) : super(key: key);
+class SignUp extends StatefulWidget {
+  const SignUp({Key? key}) : super(key: key);
 
   @override
-  _SignInState createState() => _SignInState();
+  _SignUpState createState() => _SignUpState();
 }
 
-class _SignInState extends State<SignIn> {
+class _SignUpState extends State<SignUp> {
   final AuthService _auth = AuthService();
 
   String email = '';
@@ -22,7 +21,7 @@ class _SignInState extends State<SignIn> {
       appBar: AppBar(
         backgroundColor: Colors.blueGrey[400],
         elevation: 0.0,
-        title: Text('Sign In'),
+        title: Text('Sign Up'),
       ),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
@@ -45,7 +44,7 @@ class _SignInState extends State<SignIn> {
                   print(password);
                 },
                 child: Text(
-                  'Sign In',
+                  'Sign Up',
                   style: TextStyle(color: Colors.white),
                 ),
               ),
