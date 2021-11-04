@@ -17,8 +17,20 @@ class AuthService {
 
   Future signInAnonymously() async {
     try {
-      UserCredential result = await _auth.signInAnonymously();
-      User? user = result.user;
+      UserCredential credential = await _auth.signInAnonymously();
+      User? user = credential.user;
+      return _userFromFirebase(user);
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
+  Future createUserWithEmailAndPassword(String email, String password) async {
+    try {
+      UserCredential credential = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      User? user = credential.user;
       return _userFromFirebase(user);
     } catch (e) {
       print(e.toString());
