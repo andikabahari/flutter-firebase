@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firebase/models/my_user.dart';
 import 'package:flutter_firebase/services/auth.dart';
 import 'package:flutter_firebase/shared/constants.dart';
+import 'package:flutter_firebase/shared/loading.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
@@ -16,12 +17,18 @@ class _SignInState extends State<SignIn> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
 
+  bool isLoading = false;
+
   String email = '';
   String password = '';
   String error = '';
 
   @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return Loading();
+    }
+
     return Scaffold(
       backgroundColor: Colors.blueGrey[100],
       appBar: AppBar(
@@ -60,10 +67,14 @@ class _SignInState extends State<SignIn> {
               ElevatedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
+                    setState(() => isLoading = true);
                     MyUser? user =
                         await _auth.signInWithEmailAndPassword(email, password);
                     if (user == null) {
-                      setState(() => error = 'Could not sign in.');
+                      setState(() {
+                        error = 'Could not sign in.';
+                        isLoading = false;
+                      });
                     }
                   }
                 },
