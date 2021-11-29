@@ -34,7 +34,7 @@ class AuthService {
       User? user = credential.user;
 
       await DatabaseService(uid: user!.uid)
-          .updateUserData('Ibanez Guitar', 'A semi-hollow guitar.', 2);
+          .updateUserData('new member', 1, 100);
 
       return _userFromFirebase(user);
     } catch (e) {

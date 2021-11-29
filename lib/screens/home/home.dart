@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_firebase/models/item.dart';
+import 'package:flutter_firebase/models/seblak.dart';
 import 'package:flutter_firebase/services/auth.dart';
 import 'package:flutter_firebase/services/database.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_firebase/screens/home/item_list.dart';
+import 'package:flutter_firebase/screens/home/seblak_list.dart';
 
 class Home extends StatelessWidget {
   final AuthService _auth = AuthService();
@@ -23,13 +23,13 @@ class Home extends StatelessWidget {
       );
     }
 
-    return StreamProvider<List<Item>>.value(
+    return StreamProvider<List<Seblak>>.value(
       initialData: [],
-      value: DatabaseService().items,
+      value: DatabaseService().seblaks,
       child: Scaffold(
         backgroundColor: Colors.blueGrey[50],
         appBar: AppBar(
-          title: Text('Item List'),
+          title: Text('Seblak List'),
           backgroundColor: Colors.blueGrey[400],
           elevation: 0.0,
           actions: <Widget>[
@@ -53,7 +53,7 @@ class Home extends StatelessWidget {
             ),
           ],
         ),
-        body: ItemList(),
+        body: SeblakList(),
       ),
     );
   }

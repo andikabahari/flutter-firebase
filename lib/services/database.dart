@@ -1,32 +1,32 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_firebase/models/item.dart';
+import 'package:flutter_firebase/models/seblak.dart';
 
 class DatabaseService {
-  final CollectionReference itemCollection =
-      FirebaseFirestore.instance.collection('items');
+  final CollectionReference seblakCollection =
+      FirebaseFirestore.instance.collection('seblaks');
   final String? uid;
 
   DatabaseService({this.uid});
 
-  Future updateUserData(String name, String description, int quantity) async {
-    return await itemCollection.doc(uid).set({
+  Future updateUserData(String name, int chilies, int spicyLevel) async {
+    return await seblakCollection.doc(uid).set({
       'name': name,
-      'description': description,
-      'quantity': quantity,
+      'chilies': chilies,
+      'spicyLevel': spicyLevel,
     });
   }
 
-  List<Item> _itemListFromSnapshot(QuerySnapshot snapshot) {
+  List<Seblak> _seblakListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
-      return Item(
+      return Seblak(
         name: doc.get('name') ?? '',
-        description: doc.get('description') ?? '',
-        quantity: doc.get('quantity') ?? 0,
+        chilies: doc.get('chilies') ?? '',
+        spicyLevel: doc.get('spicyLevel') ?? 0,
       );
     }).toList();
   }
 
-  Stream<List<Item>> get items {
-    return itemCollection.snapshots().map(_itemListFromSnapshot);
+  Stream<List<Seblak>> get seblaks {
+    return seblakCollection.snapshots().map(_seblakListFromSnapshot);
   }
 }
