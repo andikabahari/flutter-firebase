@@ -45,6 +45,21 @@ class _SettingsFormState extends State<SettingsForm> {
             onChanged: (int? val) => setState(() => _currentChilies = val!),
           ),
           SizedBox(height: 10.0),
+          Slider(
+            value: _currentSpicyLevel.toDouble(),
+            activeColor: Colors.pink[_currentSpicyLevel > 0
+                ? _currentSpicyLevel + (100 - _currentSpicyLevel % 100)
+                : 100],
+            inactiveColor: Colors.pink[_currentSpicyLevel > 0
+                ? _currentSpicyLevel + (100 - _currentSpicyLevel % 100)
+                : 100],
+            min: 0,
+            max: 600,
+            divisions: 5,
+            onChanged: (val) =>
+                setState(() => _currentSpicyLevel = val.round()),
+          ),
+          SizedBox(height: 10.0),
           ElevatedButton(
               child: Text(
                 'Update',
